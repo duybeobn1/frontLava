@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Dashboard</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body section-card">
+              <h5 class="card-title">Tests</h5>
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let test of tests">
+                  {{ test.description }}: {{ test.etatTest }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body section-card">
+              <h5 class="card-title">Valeur Capteurs</h5>
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let valeurCapteur of valeurCapteurs">
+                  {{ valeurCapteur.capteur.nom }}: {{ valeurCapteur.valeur }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body section-card">
+              <h5 class="card-title">Notifications</h5>
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let notification of notifications">
+                  {{ notification.test.description }}: {{ notification.email }} {{ notification.tokenAndroid }} {{ notification.tokenIos }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
