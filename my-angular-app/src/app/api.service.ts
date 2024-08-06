@@ -7,13 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private baseUrl = 'http://192.168.1.96:6822/api'; // Ensure this is the correct URL
+  private baseUrl = 'http://192.168.1.96:8080/api'; // Update with your backend URL
 
   constructor(private http: HttpClient) { }
-
-  getSensors(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/sensors`);
-  }
 
   getTests(): Observable<any> {
     return this.http.get(`${this.baseUrl}/tests`);
@@ -24,11 +20,11 @@ export class ApiService {
   }
 
   getValeurCapteurs(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/valeur-capteur`);
+    return this.http.get(`${this.baseUrl}/valeur-capteurs`);
   }
 
   createValeurCapteur(valeurCapteur: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/valeur-capteur`, valeurCapteur);
+    return this.http.post(`${this.baseUrl}/valeur-capteurs`, valeurCapteur);
   }
 
   getNotifications(): Observable<any> {
@@ -37,17 +33,5 @@ export class ApiService {
 
   createNotification(notification: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/notifications`, notification);
-  }
-
-  startTest(): Observable<any> {
-    return this.http.post(`${this.baseUrl}/tests`, { command: 'start' });
-  }
-
-  stopTest(): Observable<any> {
-    return this.http.post(`${this.baseUrl}/tests`, { command: 'stop' });
-  }
-
-  getStatus(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/tests/status`);
   }
 }

@@ -8,49 +8,33 @@ import { ApiService } from '../api.service';
 })
 export class DashboardComponent implements OnInit {
 
-  message: string = '';
-  sensorStatus: string = '';
+  tests: any[] = [];
+  valeurCapteurs: any[] = [];
+  notifications: any[] = [];
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.getSensorStatus();
+    this.loadTests();
+    this.loadValeurCapteurs();
+    this.loadNotifications();
   }
 
-  startTest(): void {
-    this.apiService.startTest().subscribe(
-      response => {
-        this.message = 'Test started successfully';
-        this.getSensorStatus();
-      },
-      error => {
-        console.error('Error starting test', error);
-        this.message = 'Error starting test';
-      }
-    );
+  loadTests(): void {
+    this.apiService.getTests().subscribe(data => {
+      this.tests = data;
+    });
   }
 
-  stopTest(): void {
-    this.apiService.stopTest().subscribe(
-      response => {
-        this.message = 'Test stopped successfully';
-        this.getSensorStatus();
-      },
-      error => {
-        console.error('Error stopping test', error);
-        this.message = 'Error stopping test';
-      }
-    );
+  loadValeurCapteurs(): void {
+    this.apiService.getValeurCapteurs().subscribe(data => {
+      this.valeurCapteurs = data;
+    });
   }
 
-  getSensorStatus(): void {
-    this.apiService.getStatus().subscribe(
-      response => {
-        this.sensorStatus = response;
-      },
-      error => {
-        console.error('Error fetching sensor status', error);
-      }
-    );
+  loadNotifications(): void {
+    this.apiService.getNotifications().subscribe(data => {
+      this.notifications = data;
+    });
   }
 }
