@@ -54,6 +54,25 @@
       <div *ngIf="message" class="alert alert-info mt-3">
         {{ message }}
       </div>
+
+      <h3 class="mt-5">Recent Test Results</h3>
+      <table class="table table-striped mt-3">
+        <thead>
+          <tr>
+            <th>Test ID</th>
+            <th>Capteur ID</th>
+            <th>Valeur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let result of recentResults">
+            <td>{{ result.testId }}</td>
+            <td>{{ result.capteurId }}</td>
+            <td>{{ result.valeur }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
+
