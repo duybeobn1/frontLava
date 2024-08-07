@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   startTest(): void {
     this.apiService.startTest().subscribe(
       response => {
-        this.message = 'Test started successfully';
+        this.message = response.result || 'Test started successfully';
         this.getRecentResults();
       },
       error => {
@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
   stopTest(): void {
     this.apiService.stopTest().subscribe(
       response => {
-        this.message = 'Test stopped successfully';
+        this.message = response.result || 'Test stopped successfully';
         this.getRecentResults();
       },
       error => {
@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
   readSensor(): void {
     this.apiService.readSensor().subscribe(
       response => {
-        this.message = 'Sensor read successfully: ' + response;
+        this.message = response.result || 'Sensor read successfully';
         this.getRecentResults();
       },
       error => {
