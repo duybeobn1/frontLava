@@ -34,4 +34,15 @@ export class ApiService {
   createNotification(notification: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/notifications`, notification);
   }
+  startTest(): Observable<any> {
+    return this.http.post(`${this.baseUrl}/tests`, { command: 'start' });
+  }
+
+  stopTest(): Observable<any> {
+    return this.http.post(`${this.baseUrl}/tests`, { command: 'stop' });
+  }
+
+  readSensor(): Observable<any> {
+    return this.http.post(`${this.baseUrl}/tests`, { command: 'read' });
+  }
 }
