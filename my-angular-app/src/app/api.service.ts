@@ -45,4 +45,7 @@ export class ApiService {
   readSensor(): Observable<any> {
     return this.http.post(`${this.baseUrl}/tests`, { command: 'read' });
   }
+  getRecentResults(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/tests/recent`);
+  }
 }

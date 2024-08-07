@@ -8,41 +8,20 @@ import { ApiService } from '../api.service';
 })
 export class DashboardComponent implements OnInit {
 
-  tests: any[] = [];
-  valeurCapteurs: any[] = [];
-  notifications: any[] = [];
   message: string = '';
+  recentResults: any[] = []; // Define recentResults as an array
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.loadTests();
-    this.loadValeurCapteurs();
-    this.loadNotifications();
-  }
-
-  loadTests(): void {
-    this.apiService.getTests().subscribe(data => {
-      this.tests = data;
-    });
-  }
-
-  loadValeurCapteurs(): void {
-    this.apiService.getValeurCapteurs().subscribe(data => {
-      this.valeurCapteurs = data;
-    });
-  }
-
-  loadNotifications(): void {
-    this.apiService.getNotifications().subscribe(data => {
-      this.notifications = data;
-    });
+    this.getRecentResults();
   }
 
   startTest(): void {
     this.apiService.startTest().subscribe(
       response => {
         this.message = 'Test started successfully';
+        this.getRecentResults();
       },
       error => {
         console.error('Error starting test', error);
@@ -55,6 +34,7 @@ export class DashboardComponent implements OnInit {
     this.apiService.stopTest().subscribe(
       response => {
         this.message = 'Test stopped successfully';
+        this.getRecentResults();
       },
       error => {
         console.error('Error stopping test', error);
@@ -67,10 +47,22 @@ export class DashboardComponent implements OnInit {
     this.apiService.readSensor().subscribe(
       response => {
         this.message = 'Sensor read successfully: ' + response;
+        this.getRecentResults();
       },
       error => {
         console.error('Error reading sensor', error);
         this.message = 'Error reading sensor';
+      }
+    );
+  }
+
+  getRecentResults(): void {
+    this.apiService.getRecentResults().subscribe(
+      data => {
+        this.recentResults = data;
+      },
+      error => {
+        console.error('Error fetching recent results', error);
       }
     );
   }
